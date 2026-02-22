@@ -57,7 +57,7 @@ public class CalculadoraTest {
 
     }
 
-    // EXTRA CALCULADORA CAJA NEGRA - DENTRO DE LA CLASE
+    // EXTRA CALCULADORA CAJA NEGRA 
     @Test
     @DisplayName("Probar divisiones válidas")
     void divisionesValidas() {
