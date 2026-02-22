@@ -56,4 +56,31 @@ public class CalculadoraTest {
         assertEquals(OperacionNoValidaException.MSG, ex.getMessage());
 
     }
+
+    // EXTRA CALCULADORA CAJA NEGRA - DENTRO DE LA CLASE
+    @Test
+    @DisplayName("Probar divisiones válidas")
+    void divisionesValidas() {
+        assertAll("Divisiones correctas",
+            () -> assertEquals(5, Calculadora.dividir(10, 2), "10/2 = 5"),
+            () -> assertEquals(-5, Calculadora.dividir(10, -2), "10/-2 = -5"),
+            () -> assertEquals(5, Calculadora.dividir(-10, -2), "-10/-2 = 5"),
+            () -> assertEquals(0, Calculadora.dividir(0, 5), "0/5 = 0"),
+            () -> assertEquals(0, Calculadora.dividir(3, 5), "3/5 = 0"),
+            () -> assertEquals(3, Calculadora.dividir(7, 2), "7/2 = 3")
+        );
+    }
+
+    @Test
+    @DisplayName("Probar divisiones no válidas (por cero)")
+    void divisionesNoValidas() {
+        assertAll("Divisiones que lanzan excepción",
+            () -> assertThrows(OperacionNoValidaException.class, 
+                () -> Calculadora.dividir(10, 0), "10/0 debe lanzar excepción"),
+            () -> assertThrows(OperacionNoValidaException.class, 
+                () -> Calculadora.dividir(-5, 0), "-5/0 debe lanzar excepción"),
+            () -> assertThrows(OperacionNoValidaException.class, 
+                () -> Calculadora.dividir(0, 0), "0/0 debe lanzar excepción")
+        );
+    }
 }
