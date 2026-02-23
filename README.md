@@ -32,8 +32,8 @@ Lo más destacable:
 | Cero dividido               | 0 / 5           | 0               | Válida         |
 | Dividendo menor que divisor | 3 / 5           | 0               | Válida         |
 | División con resto          | 7 / 2           | 3               | Válida         |
-| División por cero           | 10 / 0          | ERROR           | No válida      |
-| Cero entre cero             | 0 / 0           | ERROR           | No válida      |
+| División por cero           | 10 / 0          | 0               | No válida      |
+| Cero entre cero             | 0 / 0           | 0               | No válida      |
 
 ### Implementación en JUnit (añadir a CalculadoraTest.java):
 
