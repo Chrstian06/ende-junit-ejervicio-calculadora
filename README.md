@@ -22,6 +22,36 @@ Lo más destacable:
 
 3. Realiza un estudio de caja negra de la división e implementa las pruebas en junit: Se realizará en markdown.
 
+- En este caso tenemos dos entradas (dividendo y dividor) y una salida que es el resultado de la division.
+- Determinar clases equivalentes:
+   - Dividendo: todos los números son válidos.
+   - Divisor: todos los números son válidos menos el 0; el 0 no es válido.
+- Valores límites: (cada entrada tiene unos valores limites distintos)
+   - Dividendo (D1): 
+      - -infinito: valor mínimo.
+      - +infinito: valor máximo.
+      - Válidas: D1 < 0 | D1 > 0 | D1 = 0
+   - Divisor (D2):
+      - -infinito: valor mínimo.
+      - 0: valor intermedio pero no valido
+      - +infinito: valor máximo.
+      - Válidas: D2 < 0 | D2 > 0
+      - No Válidas: D2 = 0 
+   - Conjetura de errores: comprobaremos que cuando el divisor sea 0 dará error.
+- Casos de pruebas: (aplicando los limites para cubrir todos los casos)
+    | Caso de Prueba | Dividendo | Divisor | Salida |
+    | - | - | - | - |
+    | CP1 | 4 | 2 | 2 |
+    | CP2 | -6 | -3 | 2 |
+    | CP3 | 4 | -4 | -1 |
+    | CP4 | -8 | 4 | -2 |
+    | CP5 | 0 | 4 | 0 |
+    | CP6 | 0 | -2 | 0 |
+    | CP7 | 7 | 0 | ERROR |
+    | CP8 | -3 | 0 | ERROR |
+    | CP9 | 0 | 0 | ERROR |
+
+
 ##### Implementación en junit:
 ```java
 @Test
