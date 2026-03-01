@@ -58,29 +58,86 @@ public class CalculadoraTest {
     }
 
     // EXTRA CALCULADORA CAJA NEGRA 
-    @Test
-    @DisplayName("Probar divisiones válidas")
-    void divisionesValidas() {
-        assertAll("Divisiones correctas",
-            () -> assertEquals(5, Calculadora.dividir(10, 2), "10/2 = 5"),
-            () -> assertEquals(-5, Calculadora.dividir(10, -2), "10/-2 = -5"),
-            () -> assertEquals(5, Calculadora.dividir(-10, -2), "-10/-2 = 5"),
-            () -> assertEquals(0, Calculadora.dividir(0, 5), "0/5 = 0"),
-            () -> assertEquals(0, Calculadora.dividir(3, 5), "3/5 = 0"),
-            () -> assertEquals(3, Calculadora.dividir(7, 2), "7/2 = 3")
-        );
+@Test
+    void dividirPositivos() {
+        int valor1 = 4;
+        int valor2 = 2;
+        int esperado = 2;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
     }
 
     @Test
-    @DisplayName("Probar divisiones no válidas (por cero)")
-    void divisionesNoValidas() {
-        assertAll("Divisiones que lanzan excepción",
-            () -> assertThrows(OperacionNoValidaException.class, 
-                () -> Calculadora.dividir(10, 0), "10/0 debe lanzar excepción"),
-            () -> assertThrows(OperacionNoValidaException.class, 
-                () -> Calculadora.dividir(-5, 0), "-5/0 debe lanzar excepción"),
-            () -> assertThrows(OperacionNoValidaException.class, 
-                () -> Calculadora.dividir(0, 0), "0/0 debe lanzar excepción")
-        );
+    void dividirNegativos() {
+        int valor1 = -6;
+        int valor2 = -3;
+        int esperado = 2;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
     }
-}
+
+    @Test
+    void dividirPositivoNegativo() {
+        int valor1 = 4;
+        int valor2 = -4;
+        int esperado = -1;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
+
+    @Test
+    void dividirNegativoPositivo() {
+        int valor1 = -8;
+        int valor2 = 4;
+        int esperado = -2;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
+
+    @Test
+    void dividirCeroEntrePositivo() {
+        int valor1 = 0;
+        int valor2 = 4;
+        int esperado = 0;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
+
+    @Test
+    void dividirCeroEntreNegativo() {
+        int valor1 = 0;
+        int valor2 = -2;
+        int esperado = 0;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
+    
+    @Test
+    void dividirEntreCero() {
+        int valor1 = 7;
+        int valor2 = 0;
+
+        assertThrows(OperacionNoValidaException.class, () -> {
+         Calculadora.dividir(valor1, valor2);
+      });
+    }
+
+    @Test
+    void dividirNegativoEntreCero() {
+        int valor1 = -3;
+        int valor2 = 0;
+
+        assertThrows(OperacionNoValidaException.class, () -> {
+         Calculadora.dividir(valor1, valor2);
+      });
+    }
+
+    @Test
+    void dividirCeroEntreCero() {
+        int valor1 = 0;
+        int valor2 = 0;
+
+        assertThrows(OperacionNoValidaException.class, () -> {
+         Calculadora.dividir(valor1, valor2);
+      });
+    }
