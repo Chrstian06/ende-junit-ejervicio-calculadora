@@ -22,55 +22,90 @@ Lo más destacable:
 
 3. Realiza un estudio de caja negra de la división e implementa las pruebas en junit: Se realizará en markdown.
 
-### Particiones de equivalencia identificadas:
-
-| Caso                        | Entradas (a, b) | Salida esperada | Tipo de prueba |
-| ----------------------------| -----------------| -----------------| -------------|
-| División positiva           | 10 / 2          | 5               | Válida         |
-| Positivo entre negativo     | 10 / -2         | -5              | Válida         |
-| Negativo entre negativo     | -10 / -2        | 5               | Válida         |
-| Cero dividido               | 0 / 5           | 0               | Válida         |
-| Dividendo menor que divisor | 3 / 5           | 0               | Válida         |
-| División con resto          | 7 / 2           | 3               | Válida         |
-| División por cero           | 10 / 0          | 0               | No válida      |
-| Cero entre cero             | 0 / 0           | 0               | No válida      |
-
-### Implementación en JUnit (añadir a CalculadoraTest.java):
-
+##### Implementación en junit:
 ```java
 @Test
-@DisplayName("Probar divisiones válidas")
-void divisionesValidas() {
-    assertAll("Divisiones correctas",
-        () -> assertEquals(5, Calculadora.dividir(10, 2), "10/2 = 5"),
-        () -> assertEquals(-5, Calculadora.dividir(10, -2), "10/-2 = -5"),
-        () -> assertEquals(5, Calculadora.dividir(-10, -2), "-10/-2 = 5"),
-        () -> assertEquals(0, Calculadora.dividir(0, 5), "0/5 = 0"),
-        () -> assertEquals(0, Calculadora.dividir(3, 5), "3/5 = 0"),
-        () -> assertEquals(3, Calculadora.dividir(7, 2), "7/2 = 3")
-    );
-}
+    void dividirPositivos() {
+        int valor1 = 4;
+        int valor2 = 2;
+        int esperado = 2;
 
-@Test
-@DisplayName("Probar divisiones no válidas (por cero)")
-void divisionesNoValidas() {
-    assertAll("Divisiones que lanzan excepción",
-        () -> assertThrows(OperacionNoValidaException.class, 
-            () -> Calculadora.dividir(10, 0), "10/0 debe lanzar excepción"),
-        () -> assertThrows(OperacionNoValidaException.class, 
-            () -> Calculadora.dividir(-5, 0), "-5/0 debe lanzar excepción"),
-        () -> assertThrows(OperacionNoValidaException.class, 
-            () -> Calculadora.dividir(0, 0), "0/0 debe lanzar excepción")
-    );
-}
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
 
+    @Test
+    void dividirNegativos() {
+        int valor1 = -6;
+        int valor2 = -3;
+        int esperado = 2;
 
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
 
-## Instrucciones
+    @Test
+    void dividirPositivoNegativo() {
+        int valor1 = 4;
+        int valor2 = -4;
+        int esperado = -1;
 
-El alumno deberá hacer un fork de este proyecto e implementar la solución solicitada (preguntas y código).
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
 
->Se deberá utilizar este fichero, y los artefactos de código del proyecto, para resolver el ejercicio.
+    @Test
+    void dividirNegativoPositivo() {
+        int valor1 = -8;
+        int valor2 = 4;
+        int esperado = -2;
 
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
 
+    @Test
+    void dividirCeroEntrePositivo() {
+        int valor1 = 0;
+        int valor2 = 4;
+        int esperado = 0;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
+
+    @Test
+    void dividirCeroEntreNegativo() {
+        int valor1 = 0;
+        int valor2 = -2;
+        int esperado = 0;
+
+        assertEquals(esperado, Calculadora.dividir(valor1, valor2));
+    }
+    
+    @Test
+    void dividirEntreCero() {
+        int valor1 = 7;
+        int valor2 = 0;
+
+        assertThrows(OperacionNoValidaException.class, () -> {
+         Calculadora.dividir(valor1, valor2);
+      });
+    }
+
+    @Test
+    void dividirNegativoEntreCero() {
+        int valor1 = -3;
+        int valor2 = 0;
+
+        assertThrows(OperacionNoValidaException.class, () -> {
+         Calculadora.dividir(valor1, valor2);
+      });
+    }
+
+    @Test
+    void dividirCeroEntreCero() {
+        int valor1 = 0;
+        int valor2 = 0;
+
+        assertThrows(OperacionNoValidaException.class, () -> {
+         Calculadora.dividir(valor1, valor2);
+      });
+    }
+```
 **Si no se puede acceder al repositorio la evaluación del ejercicio será de 0. No se evaluarán entregas modificadas/entregadas fuera del plazo establecido en la tarea**
